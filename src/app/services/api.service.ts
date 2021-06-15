@@ -9,6 +9,8 @@ import { map } from "rxjs/operators";
 })
 export class ApiService {
 
+  private _url: string = "http://localhost:3000";
+
   private _employees: Employee[] = [];
 
   constructor(private _http: HttpClient) {
@@ -22,12 +24,21 @@ export class ApiService {
       }));
   }
 
-  getListEmployees():Observable<Employee[]> {
+  getListEmployees(): Observable<Employee[]> {
     const url = "http://localhost:3000/posts";
     return this._http.get<Employee[]>(url)
       .pipe(map((resp: Employee[]) => {
         return resp;
       }));
   }
+
+  deleteEmployee(id: number) {
+    return this._http.delete<Employee>(`${this._url}/posts/${id}`)
+      .pipe(map(resp => {
+        return resp;
+      }));
+  }
+
+
 
 }

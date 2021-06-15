@@ -9,12 +9,20 @@
       "salary": "$123"
     },
     {
-      "id": 2,
-      "email": "xx",
-      "firstName": "xx",
-      "lastName": "xx",
-      "mobile": "01414",
-      "salary": 123
+      "id": 3,
+      "email": "karevalol@gmail.com",
+      "firstName": "Katherine",
+      "lastName": "Arevalo",
+      "mobile": "0980069788",
+      "salary": 1000
+    },
+    {
+      "id": 4,
+      "email": "vjunquim@gmail.com",
+      "firstName": "Valentina ",
+      "lastName": "Junqui",
+      "mobile": "0909090909",
+      "salary": 12345
     }
   ],
   "comments": [

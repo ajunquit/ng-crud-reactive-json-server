@@ -2,8 +2,19 @@
   "posts": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "firstName": "Alejandro",
+      "lastName": "junqui",
+      "email": "alejandro@gmail.com",
+      "mobile": "0980069788",
+      "salary": "$123"
+    },
+    {
+      "id": 2,
+      "email": "xx",
+      "firstName": "xx",
+      "lastName": "xx",
+      "mobile": "01414",
+      "salary": 123
     }
   ],
   "comments": [

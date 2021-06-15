@@ -1,8 +1,8 @@
-<nav class="navbar navbar-light btn-danger">
+<nav class="navbar navbar-light bg-secondary">
     <div class="container-fluid">
         <h1 style="color:aliceblue">Angular CRUD</h1>
         <div class="d-flex">
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addEmployee">Add Employee</button>
+            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addEmployee">Add Employee</button>
         </div>
     </div>
 </nav>
@@ -35,7 +35,7 @@
     </tbody>
 </table>
 
-<!-- Modal -->
+<!-- Modal Employee -->
 <div class="modal fade" id="addEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -47,8 +47,7 @@
                 <form [formGroup]="formValue">
                     <div class="mb-3">
                         <label for="txtFirstName" class="form-label">First Name</label>
-                        <input type="text" formControlName="firstName" class="form-control" id="txtFirstName" aria-describedby="helpFirstName">
-                        
+                        <input type="text" formControlName="firstName" class="form-control" id="txtFirstName" aria-describedby="helpFirstName">    
                     </div>
                     <div class="mb-3">
                         <label for="txtLastName" class="form-label">Last Name</label>
@@ -71,7 +70,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button (click)="postEmployee()" type="button" class="btn btn-primary">Add</button>
             </div>
         </div>
     </div>

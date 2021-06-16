@@ -2,7 +2,8 @@
     <div class="container-fluid">
         <h1 style="color:aliceblue">Angular CRUD</h1>
         <div class="d-flex">
-            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addEmployee">Add Employee</button>
+            <button (click)="clickAddEmployee()" class="btn btn-warning" data-bs-toggle="modal"
+                data-bs-target="#addEmployee">Add Employee</button>
         </div>
     </div>
 </nav>
@@ -28,8 +29,10 @@
             <td>{{employee.mobile}}</td>
             <td>{{employee.salary}}</td>
             <td>
-                <button (click)="onEdit(employee)" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</button>
-                <button (click)="deleteEmployee(employee.id)" class="btn btn-danger mx-3"> <i class="fa fa-trash"></i>Delete</button>
+                <button (click)="onEdit(employee)" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#addEmployee"><i class="fa fa-edit"></i> Edit</button>
+                <button (click)="deleteEmployee(employee.id)" class="btn btn-danger mx-3"> <i
+                        class="fa fa-trash"></i>Delete</button>
             </td>
         </tr>
     </tbody>
@@ -66,14 +69,16 @@
                     </div>
                     <div class="mb-3">
                         <label for="txtSalary" class="form-label">Salary</label>
-                        <input type="number" formControlName="salary" class="form-control" id="txtSalary">
+                        <input type="text" formControlName="salary" class="form-control" id="txtSalary">
                     </div>
 
                 </form>
             </div>
             <div class="modal-footer">
                 <button id="cancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button (click)="postEmployee()" type="button" class="btn btn-primary">Add</button>
+                <button *ngIf="showAdd" (click)="postEmployee()" type="button" class="btn btn-primary">Add</button>
+                <button *ngIf="showUpdate" (click)="updateEmployee()" type="button"
+                    class="btn btn-primary">Update</button>
             </div>
         </div>
     </div>

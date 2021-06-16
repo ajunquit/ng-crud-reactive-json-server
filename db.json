@@ -2,26 +2,34 @@
   "posts": [
     {
       "id": 1,
+      "email": "ajunquit@gmail.com",
       "firstName": "Alejandro",
-      "lastName": "junqui",
-      "email": "alejandro@gmail.com",
-      "mobile": "0980069788",
-      "salary": "$123"
+      "lastName": "Junqui",
+      "mobile": "+593980069788",
+      "salary": "$800"
     },
     {
       "id": 3,
       "email": "karevalol@gmail.com",
       "firstName": "Katherine",
       "lastName": "Arevalo",
-      "mobile": "0980069788",
-      "salary": 1000
+      "mobile": "0123456789",
+      "salary": "$1000"
     },
     {
       "id": 4,
       "email": "vjunquim@gmail.com",
       "firstName": "Valentina ",
       "lastName": "Junqui",
-      "mobile": "0909090909",
+      "mobile": "0123456789",
+      "salary": "$123"
+    },
+    {
+      "id": 5,
+      "email": "marevalo@gmail.com",
+      "firstName": "Mathias",
+      "lastName": "Arevalo",
+      "mobile": "0123456789",
       "salary": 12345
     }
   ],

@@ -5,7 +5,6 @@ import { Employee } from '../interfaces/employee';
 import { EmployeeModel } from '../class/employee-model';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-employee-dashboard',
   templateUrl: './employee-dashboard.component.html',
@@ -13,6 +12,8 @@ import Swal from 'sweetalert2';
 })
 export class EmployeeDashboardComponent implements OnInit {
 
+  showAdd: boolean = false;
+  showUpdate: boolean = false;
   formValue!: FormGroup;
   employee: EmployeeModel = new EmployeeModel();
   employees: Employee[] = [];
@@ -31,35 +32,79 @@ export class EmployeeDashboardComponent implements OnInit {
     });
   }
 
+  /**
+   * flags condition buttons modals
+   */
+  clickAddEmployee() {
+    this.showAdd = true; /* true for add new employee */
+    this.showUpdate = false; /* set in false */
+  }
+
+  /**
+   * save a employee.
+   */
   postEmployee() {
+    /**
+     * set value from form control to model.
+     */
     this.employee.firstName = this.formValue.value.firstName;
     this.employee.lastName = this.formValue.value.lastName;
     this.employee.email = this.formValue.value.email;
     this.employee.mobile = this.formValue.value.mobile;
     this.employee.salary = this.formValue.value.salary;
+
+    /**
+     * add model in service.
+     */
     this._api.postAddEmployee(this.employee)
       .subscribe((resp) => {
-        console.log(resp);
-
         this.formValue.reset(); // se resetea el formulario reactivo.
         this.getEmployees();
         let cancelButton = document.getElementById("cancel");
         cancelButton?.click();
-        alert("Registrado con éxito.");
+        this.formValue.reset();
+        Swal.fire(
+          'Registered!',
+          'Your file has been registered.',
+          'success'
+        );
       }, err => {
         console.error(err);
-        alert("algo salió mal!.");
+        Swal.fire(
+          'Ups!',
+          'Something went bad.',
+          'error'
+        );
       });
   }
 
+  /**
+   * get list  employees .
+   */
   getEmployees() {
+    /**
+     * get employees from service.
+     */
     this._api.getListEmployees()
       .subscribe(resp => {
         this.employees = resp;
+      }, err => {
+        console.error(err);
+        Swal.fire(
+          'Ups!',
+          'Something went bad.',
+          'error'
+        );
       });
   }
 
+  /**
+   * delete a employee by id.
+   * @param id employee id.
+   */
   deleteEmployee(id: number) {
+
+    /* sweet alert */
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -83,6 +128,13 @@ export class EmployeeDashboardComponent implements OnInit {
           .subscribe(resp => {
             console.log(resp);
             this.getEmployees();
+          }, err => {
+            console.error(err);
+            Swal.fire(
+              'Ups!',
+              'Something went bad.',
+              'error'
+            );
           });
         /* END CODE FOR DELETE */
         swalWithBootstrapButtons.fire(
@@ -104,8 +156,56 @@ export class EmployeeDashboardComponent implements OnInit {
 
   }
 
+  /**
+   * for edit an employee.
+   * @param employee model employee
+   */
   onEdit(employee: Employee) {
-    console.log(employee);
+    /* flags condition buttons modals*/
+    this.showAdd = false;
+    this.showUpdate = true;
+
+    /* set values from model to formgroup */
+    this.employee.id = employee.id;
+    this.formValue.controls['firstName'].setValue(employee.firstName);
+    this.formValue.controls['lastName'].setValue(employee.lastName);
+    this.formValue.controls['email'].setValue(employee.email);
+    this.formValue.controls['mobile'].setValue(employee.mobile);
+    this.formValue.controls['salary'].setValue(employee.salary);
+  }
+
+  updateEmployee() {
+    /**
+     * set value from form control to model.
+     */
+
+    this.employee.firstName = this.formValue.value.firstName;
+    this.employee.lastName = this.formValue.value.lastName;
+    this.employee.email = this.formValue.value.email;
+    this.employee.mobile = this.formValue.value.mobile;
+    this.employee.salary = this.formValue.value.salary;
+
+    /* */
+    this._api.putUpdateEmployee(this.employee.id, this.employee)
+      .subscribe(resp => {
+        this.getEmployees();
+        let cancelButton = document.getElementById("cancel");
+        cancelButton?.click();
+        this.formValue.reset();
+        Swal.fire(
+          'Updated!',
+          'Your employee has been updated.',
+          'success'
+        );
+      }, err => {
+        console.error(err);
+        Swal.fire(
+          'Ups!',
+          'Something went bad.',
+          'error'
+        );
+      });
+
   }
 
 }

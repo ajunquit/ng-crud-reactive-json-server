@@ -18,15 +18,14 @@ export class ApiService {
   }
 
   postAddEmployee(employee: Employee): Observable<Employee> {
-    return this._http.post<Employee>("http://localhost:3000/posts", employee)
+    return this._http.post<Employee>(`${this._url}/posts`, employee)
       .pipe(map((resp: Employee) => {
         return resp;
       }));
   }
 
   getListEmployees(): Observable<Employee[]> {
-    const url = "http://localhost:3000/posts";
-    return this._http.get<Employee[]>(url)
+    return this._http.get<Employee[]>(`${this._url}/posts`)
       .pipe(map((resp: Employee[]) => {
         return resp;
       }));
@@ -34,6 +33,13 @@ export class ApiService {
 
   deleteEmployee(id: number) {
     return this._http.delete<Employee>(`${this._url}/posts/${id}`)
+      .pipe(map(resp => {
+        return resp;
+      }));
+  }
+
+  putUpdateEmployee(id: number, employee: Employee) {
+    return this._http.put<Employee>(`${this._url}/posts/${id}`, employee)
       .pipe(map(resp => {
         return resp;
       }));
